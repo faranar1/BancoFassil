@@ -75,17 +75,19 @@ def show_menu_pygame(currentpin):
         draw_text(f"Euros:      {moneyeuros[index]}", 100, 300, fuente_opc, (255, 255, 255))
         draw_text(f"Libras:     {moneypounds[index]}", 100, 350, fuente_opc, (255, 255, 255))
         
-        draw_text("1. DEPOSITAR / RETIRAR", 600, 450, fuente_opc)
-        draw_text("2. TRANSFERENCIA", 600, 500, fuente_opc)
-        draw_text("3. SALIR", 600, 550, fuente_opc, (255, 0, 0))
+        draw_text("1. DEPOSITAR", 600, 450, fuente_opc)
+        draw_text("2. RETIRAR", 600, 500, fuente_opc)
+        draw_text("3. TRANSFERENCIA", 600, 550, fuente_opc, (255, 0, 0))
+        draw_text("4. SALIR",600,600, fuente_opc,(255,0,0))
         pygame.display.flip()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT: pygame.quit(); sys.exit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_1: return "OP"
-                if event.key == pygame.K_2: return "TR"
-                if event.key == pygame.K_3: 
+                if event.key == pygame.K_1: return "DE"
+                if event.key == pygame.K_2: return "RE"
+                if event.key == pygame.K_3: return "TR"
+                if event.key == pygame.K_4: 
                     return "OUT"
 def main():
     while True:
@@ -103,9 +105,12 @@ def main():
                 "Libras": moneypounds[index]
             }
 
-            if accion == "OP":
-                from operaciones_pygame import operaciones
+            if accion == "DE":
+                from operaciones_pygame_deposito import operaciones
                 operaciones(screen, saldos_dict)
+            elif accion == "RE":
+                from operaciones_pygame import operaciones
+                operaciones(screen,saldos_dict)
             elif accion == "TR":
                 from transferencia_pygame import abrir_transferencia_pygame
                 abrir_transferencia_pygame(screen, saldos_dict)
