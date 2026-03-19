@@ -1,72 +1,101 @@
-vocales="aeiouAEIOU"
+
 numeros="0123456789"
 
 #
-users=[]
-passwords=[]
+
+pins=[]
 money=[]
 moneydollars=[]
 moneyeuros=[]
-moneysoles=[]
-indice=len(users)
+moneypounds=[]
+indice=len(pins)
 
 #se crea un usuario nuevo si al verificar
-def create_user(users, passwords, money):
+def create_pin(pins, money):
     startmoney=0
-    print("Ingresa un usuario y una contraseña (Solo pueden tener entre 4 y 6 caracteres, y 4 contener vocales (aeiou, AEIOU) y numeros (0123456789)")
+    
+    print("Crear pin de 4 digitos")
     while True:
-        print("Registro de usuario:")
-        user=input("Ingresa un nombre de usuario: ")
-        password=input("Ingresa una contraseña: ")
-        if 4<len(user)<6:
-            vocalesuser = sum(1 for char in user if char in vocales)
-            numerosuser= sum(1 for char in user if char in numeros)
-            if vocalesuser+numerosuser>2:
-                uservalido=True
-            elif user in users:
-                print("Nombre ocupado")
-            else: print("Usuario invalido")
-            vocalespass = sum(1 for char in password if char in vocales)
-            numerospass= sum(1 for char in password if char in numeros)
-            if vocalespass+numerospass>4:
-                passvalido=True
-            else: print("Password invalido")
-            if uservalido==True and passvalido==True:
-                users[indice]=user
-                passwords[indice]=password
-                money[indice]=startmoney
-                moneydollars[indice]=startmoney
-                moneyeuros[indice]=startmoney
-                moneysoles[indice]=startmoney
-                return users, passwords, money, moneydollars, moneyeuros, moneysoles
-        break
+        
+        pin=input("Ingresa un pin: ")
+        if len(pin)==4:
+            
+            if type(pin)==int:
+                pinvalido=True
+            elif pin in pins:
+                    print("Pin ya existe")
+            else: print("Pin invalido")
+            
+            
 
-def login_user(users, passwords):
+            
+        else: print("pin invalido")
+        if pinvalido==True:
+            
+            pins.append(pin)
+            money.append(startmoney)
+            moneydollars.append(startmoney)
+            moneyeuros.append(startmoney)
+            moneypounds.append(startmoney)
+            return pins, money, moneydollars, moneyeuros, moneypounds
+        
+
+def login_pin(pins):
     while True:
-        loginuser=input("Ingresa tu usuario: ")
-        loginpass=input("Ingresa tu contraseña: ")
+        
+        loginpin=input("Ingresa tu pin: ")
 
-        if loginuser in users and loginpass in passwords and users.index(loginuser)==passwords.index(loginpass):
-            return True, loginuser, loginpass
+        if loginpin in pins:
+            return loginpin
         else: 
+            print("Pin invalido")
             print("Crear cuenta?")
-            while True:
-                eleccion=input("y/n: ")
-                if eleccion!=y:
-                    break
-                else:
-                    loginuser,loginpass,loginmoney=create_user(users,passwords,money)
-
+            
+            eleccion=input("Escribe (y) si quieres crear cuenta, sino introduce lo que sea: ")
+            if eleccion!="y":
+                continue
+            
+            loginpin=create_pin(pins,money)
+            if loginpin in pins:
+                return loginpin
     
         
 
 
 
 
+pin=login_pin(pins)
 
-
-def show_menu():
+def show_menu(currentpin,pins):
     print("|||||||||||¡Bienvenido al Banco Difissil!|||||||||||")
+    index=pins.index(pin)
+    opcion=0
     while True:
-        print(user)
+        while opcion not in [1,2,3,4,5]:
         
+            print("Bolivianos: ",money[index])
+            print("Dolares: ",moneydollars[index])
+            print("Euros: ",moneyeuros[index])
+            print("Libras Esterlinas: ",moneypounds[index])
+            print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
+            print("         Opciones:")
+            print("   1.  Depositar")
+            print("   2.  Retiro")
+            print("   3.  Transferencia")
+            print("   4.  Conversion de moneda")
+            print("   5.  Salir")
+            print("/////////////////////////////////////////////////////////////")
+            opcion=input("Ingresa una opción: ")
+            try: opcion=int(opcion)
+            except: continue
+            if opcion==1:
+                True
+            if opcion==2:
+                True
+            if opcion==3:
+                True
+            if opcion==4:
+                True
+            if opcion==5:
+                False
+                
