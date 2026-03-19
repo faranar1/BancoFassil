@@ -1,8 +1,8 @@
 tipos_de_cambio = {
     "Bolivianos": 1.0,
-    "Dolares":    0.1449,
-    "Euros":      0.1335,
-    "Libras":     0.1142,
+    "Dolares":    0.1438,
+    "Euros":      0.1254,
+    "Libras":     0.1083,
 }
 
 def transferir(saldos):
